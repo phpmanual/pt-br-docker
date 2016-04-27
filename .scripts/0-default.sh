@@ -106,6 +106,9 @@ main() {
 if [ "$1" = "build" ] && [ -d $VOLUME_DIR/build ] && [ -d $VOLUME_DIR/doc-pt_BR ] && [ -d $VOLUME_DIR/web-php ]; then
   exec "/scripts/1-build.sh"
   exit 0
+elif [ "$1" = "shell" ]; then
+  /usr/bin/env sh
+  exit 0
 else
   main
 fi
