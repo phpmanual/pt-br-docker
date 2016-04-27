@@ -104,7 +104,7 @@ main() {
 }
 
 if [ "$1" = "build" ] && [ -d $VOLUME_DIR/build ] && [ -d $VOLUME_DIR/doc-pt_BR ] && [ -d $VOLUME_DIR/web-php ]; then
-  exec "`pwd`/1-build.sh"
+  exec "/scripts/1-build.sh"
   exit 0
 else
   main
