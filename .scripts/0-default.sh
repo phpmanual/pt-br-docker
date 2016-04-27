@@ -72,7 +72,7 @@ sync_directories() {
   echo "Syncing directories" | colorize_output
 
   if [ -d $VOLUME_DIR/build ] && [ -d $VOLUME_DIR/doc-pt_BR ] && [ -d $VOLUME_DIR/web-php ]; then
-    rsync -avzh --update $MANUAL_DIR/ $VOLUME_DIR
+    rsync -avzh --no-compress --update $MANUAL_DIR/ $VOLUME_DIR
   else
     cp -Rv $MANUAL_DIR/ $VOLUME_DIR
   fi
