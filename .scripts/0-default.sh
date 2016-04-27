@@ -71,7 +71,11 @@ update_git_web() {
 sync_directories() {
   echo "Syncing directories" | colorize_output
 
-  rsync -avzh --update $MANUAL_DIR $VOLUME_DIR
+  if [ -d $VOLUME_DIR/build ] && [ -d $VOLUME_DIR/doc-pt_BR ] && [ -d $VOLUME_DIR/web-php ]; then
+    rsync -avzh --update $MANUAL_DIR/ $VOLUME_DIR
+  else
+    cp -Rv $MANUAL_DIR/ $VOLUME_DIR
+  fi
 
   echo "Done." | indent_output
   echo
@@ -93,17 +97,13 @@ main() {
   echo
 
   update_svn
-
   build_inside_container
-
   update_git_web
-
   sync_directories
-
   start_web_server
 }
 
-if [ "$1" = "build" ] && [ -d $VOLUME_DIR/doc-pt_BR ] && [ -d $VOLUME_DIR/web-php ]; then
+if [ "$1" = "build" ] && [ -d $VOLUME_DIR/build ] && [ -d $VOLUME_DIR/doc-pt_BR ] && [ -d $VOLUME_DIR/web-php ]; then
   exec "`pwd`/1-build.sh"
   exit 0
 else
