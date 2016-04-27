@@ -64,3 +64,4 @@ main() {
   start_web_server  
 }
 
+main
